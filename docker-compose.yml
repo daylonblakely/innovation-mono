@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  # React App
+  todo-client:
+    extends:
+      file: docker-compose.base.yml
+      service: nx-app-base
+    command: npm run todo-client:dev:docker
+    ports:
+      - 4201:4200
+
+  # Express App
+  todo-api:
+    extends:
+      file: docker-compose.base.yml
+      service: nx-app-base
+    command: npm run todo-api:dev:docker
+    ports:
+      - 4310:3000
+
+volumes:
+  mono-node-modules: null
