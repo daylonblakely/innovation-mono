@@ -27,8 +27,6 @@ services:
       - mongo
     environment:
       - DEV_PLATFORM=DOCKER
-      - MONGODB_ADMINUSERNAME=user
-      - MONGODB_ADMINPASSWORD=password
       - MONGODB_URL=mongodb://user:password@mongo:27017/
     volumes:
       - ./:/app

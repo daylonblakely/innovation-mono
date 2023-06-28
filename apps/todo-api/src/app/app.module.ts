@@ -12,8 +12,6 @@ import { TodosModule } from '../todos/todos.module';
     ConfigModule.forRoot({
       isGlobal: true,
       validationSchema: Joi.object({
-        MONGODB_ADMINUSERNAME: Joi.string().required(),
-        MONGODB_ADMINPASSWORD: Joi.string().required(),
         MONGODB_URL: Joi.string().required(),
       }),
     }),
@@ -21,7 +19,7 @@ import { TodosModule } from '../todos/todos.module';
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
         uri: configService.get<string>('MONGODB_URL'),
-        dbName: 'test',
+        dbName: 'todoDb',
       }),
       inject: [ConfigService],
     }),
