@@ -1,47 +1,35 @@
 version: '3'
 
 services:
-  nx-app-base:
-    restart: always
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: dblakely/nx-app-base
-    environment:
-      - DEV_PLATFORM=DOCKER
-    volumes:
-      # - ./:/app
-      - mono-node-modules:/app/node_modules
-    deploy:
-      mode: replicated
-      replicas: 0
   # React App
-  # todo-client:
-  #   extends:
-  #     file: docker-compose.base.yml
-  #     service: nx-app-base
-  #   command: npm run todo-client:dev:docker
-  #   ports:
-  #     - 4201:4200
-
-  # Express App
-  todo-api:
-    # extends:
-    #   file: docker-compose.base.yml
-    #   service: nx-app-base
-    # command: npm run todo-api:dev:docker
+  todo-client:
     restart: always
     build:
-      context: ./apps/todo-api
+      dockerfile: ./apps/todo-client/Dockerfile
       target: develop
-    depends_on:
-      - nx-app-base
+    command: npm run todo-client:dev:docker
     environment:
       - DEV_PLATFORM=DOCKER
     volumes:
-      - ./:/app/api
+      - ./:/app
+      - mono-node-modules:/app/node_modules
     ports:
-      - 4310:3000
+      - 4200:4200
+
+  # Nest Api
+  todo-api:
+    restart: always
+    build:
+      dockerfile: ./apps/todo-api/Dockerfile
+      target: develop
+    command: npm run todo-api:dev:docker
+    environment:
+      - DEV_PLATFORM=DOCKER
+    volumes:
+      - ./:/app
+      - mono-node-modules:/app/node_modules
+    ports:
+      - 3000:3000
 
 volumes:
   mono-node-modules: null

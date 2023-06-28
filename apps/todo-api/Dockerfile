@@ -1,7 +1,9 @@
-FROM dblakely/nx-app-base AS develop
+FROM node:17-alpine3.12 AS develop
 
 WORKDIR /app
 
-EXPOSE 3000
+COPY package*.json ./
 
-CMD [ "npm", "run", "todo-api:dev:docker" ]
+RUN npm install
+
+COPY . .
