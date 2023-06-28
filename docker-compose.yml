@@ -48,7 +48,7 @@ services:
       - node-network
 
 volumes:
-  mono-node-modules: null
+  mono-node-modules:
 
 networks:
   node-network:

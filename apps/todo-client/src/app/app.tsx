@@ -1,14 +1,39 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import styles from './app.module.css';
+import React from 'react';
+import { Provider } from 'react-redux';
 
-import NxWelcome from './nx-welcome';
+import { Todo } from '@innovation-mono/todos/types';
+import {
+  store,
+  useGetTodosQuery,
+} from '@innovation-mono/todos/client/data-access';
 
-export function App() {
+const TodoList: React.FC = () => {
+  const { data: todos, isLoading } = useGetTodosQuery();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div>
-      <NxWelcome title="todo-client" />
+      <h1>Todo List</h1>
+      <ul>
+        {todos?.map((todo: Todo, i) => (
+          <li key={i}>{todo.title}</li>
+        ))}
+      </ul>
     </div>
   );
-}
+};
+
+const App: React.FC = () => {
+  return (
+    <Provider store={store}>
+      <div className="App">
+        <TodoList />
+      </div>
+    </Provider>
+  );
+};
 
 export default App;
