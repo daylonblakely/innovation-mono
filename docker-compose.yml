@@ -10,6 +10,8 @@ services:
     command: npm run todo-client:dev:docker
     environment:
       - DEV_PLATFORM=DOCKER
+      # in app vars need to be prefixed with NX
+      - NX_TODO_API_URL=http://localhost:3000/api
     volumes:
       - ./:/app
       - mono-node-modules:/app/node_modules
@@ -28,6 +30,8 @@ services:
     environment:
       - DEV_PLATFORM=DOCKER
       - MONGODB_URL=mongodb://user:password@mongo:27017/
+      - CLIENT_CORS_URL=http://localhost:4200
+      - PORT=3000
     volumes:
       - ./:/app
       - mono-node-modules:/app/node_modules

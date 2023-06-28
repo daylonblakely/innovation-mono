@@ -3,7 +3,7 @@ import { Todo } from '@innovation-mono/todos/types';
 
 export const api = createApi({
   reducerPath: 'todoApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000/api' }),
+  baseQuery: fetchBaseQuery({ baseUrl: process.env['NX_TODO_API_URL'] }),
   endpoints: (builder) => ({
     getTodos: builder.query<Todo[], void>({
       query: () => 'todos',

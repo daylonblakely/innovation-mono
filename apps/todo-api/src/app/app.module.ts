@@ -13,6 +13,8 @@ import { AppService } from './app.service';
       isGlobal: true,
       validationSchema: Joi.object({
         MONGODB_URL: Joi.string().required(),
+        CLIENT_CORS_URL: Joi.string().required(),
+        PORT: Joi.number().optional(),
       }),
     }),
     MongooseModule.forRootAsync({
