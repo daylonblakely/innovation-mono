@@ -15,8 +15,11 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@innovation-mono/todos/data-access": [
-        "libs/todos/data-access/src/index.ts"
+      "@innovation-mono/todos/api/feature-todos": [
+        "libs/todos/api/feature-todos/src/index.ts"
+      ],
+      "@innovation-mono/todos/client/data-access": [
+        "libs/todos/client/data-access/src/index.ts"
       ],
       "@innovation-mono/todos/types": ["libs/todos/types/src/index.ts"]
     }

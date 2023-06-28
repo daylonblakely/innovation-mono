@@ -3,9 +3,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import Joi from 'joi';
 
+import { TodosModule } from '@innovation-mono/todos/api/feature-todos';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { TodosModule } from '../todos/todos.module';
 
 @Module({
   imports: [
