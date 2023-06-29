@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@innovation-mono/shared/ui-cards": ["libs/shared/ui-cards/src/index.ts"],
       "@innovation-mono/shared/ui-modals": [
         "libs/shared/ui-modals/src/index.ts"
       ],
