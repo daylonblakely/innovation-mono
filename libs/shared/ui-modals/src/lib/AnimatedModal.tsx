@@ -20,7 +20,7 @@ export function AnimatedModal({
   const modalVariants = {
     hidden: {
       opacity: 0,
-      y: -100,
+      y: '-100vh',
     },
     visible: {
       opacity: 1,
@@ -33,7 +33,7 @@ export function AnimatedModal({
     },
     exit: {
       opacity: 0,
-      y: -100,
+      y: '-100vh',
       transition: {
         type: 'spring',
         stiffness: 200,
@@ -48,6 +48,7 @@ export function AnimatedModal({
       onRequestClose={closeModal}
       overlayClassName="modal-overlay"
       className="modal-content"
+      closeTimeoutMS={200} // Optional: Add a timeout for smoother transitions
     >
       <motion.div
         className="modal"
