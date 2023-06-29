@@ -1,36 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Provider } from 'react-redux';
 
-import { Todo } from '@innovation-mono/todos/types';
-import {
-  store,
-  useGetTodosQuery,
-} from '@innovation-mono/todos/client/data-access';
-
-const TodoList: React.FC = () => {
-  const { data: todos, isLoading } = useGetTodosQuery();
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  return (
-    <div>
-      <h1>Todo List</h1>
-      <ul>
-        {todos?.map((todo: Todo, i) => (
-          <li key={i}>{todo.title}</li>
-        ))}
-      </ul>
-    </div>
-  );
-};
+import { store } from '@innovation-mono/todos/client/data-access';
+import { AnimatedModal } from '@innovation-mono/shared/ui-modals';
 
 const App: React.FC = () => {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [todoText, setTodoText] = useState('');
+
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+    setTodoText('');
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (todoText.trim() === '') {
+      return; // Don't add empty todos
+    }
+    // addTodo(todoText);
+    setTodoText('');
+    closeModal();
+  };
+
   return (
     <Provider store={store}>
       <div className="App">
-        <TodoList />
+        <button onClick={openModal}>Add Todo</button>
+        <AnimatedModal modalIsOpen={modalIsOpen} closeModal={closeModal}>
+          <h2>Add Todo</h2>
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              value={todoText}
+              onChange={(e) => setTodoText(e.target.value)}
+            />
+            <button type="submit">Add</button>
+          </form>
+          <button onClick={closeModal}>Cancel</button>
+        </AnimatedModal>
       </div>
     </Provider>
   );

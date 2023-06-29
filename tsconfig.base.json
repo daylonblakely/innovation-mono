@@ -15,6 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@innovation-mono/shared/ui-modals": [
+        "libs/shared/ui-modals/src/index.ts"
+      ],
       "@innovation-mono/todos/api/feature-todos": [
         "libs/todos/api/feature-todos/src/index.ts"
       ],

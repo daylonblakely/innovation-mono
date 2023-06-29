@@ -1,0 +1,16 @@
+{
+  "name": "shared-ui-modals",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/ui-modals/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/shared/ui-modals/**/*.{ts,tsx,js,jsx}"]
+      }
+    }
+  }
+}
