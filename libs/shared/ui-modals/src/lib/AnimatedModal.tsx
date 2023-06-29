@@ -1,23 +1,22 @@
 import './animated-modal.css';
 import React from 'react';
 import Modal from 'react-modal';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 
 Modal.setAppElement('#root'); // Set the app element for accessibility
 
-/* eslint-disable-next-line */
 export interface AnimatedModalProps {
   modalIsOpen: boolean;
   closeModal: () => void;
   children: React.ReactNode;
 }
 
-export function AnimatedModal({
+export const AnimatedModal: React.FC<AnimatedModalProps> = ({
   modalIsOpen,
   closeModal,
   children,
-}: AnimatedModalProps) {
-  const modalVariants = {
+}) => {
+  const modalVariants: Variants = {
     hidden: {
       opacity: 0,
       y: '-100vh',
@@ -61,6 +60,6 @@ export function AnimatedModal({
       </motion.div>
     </Modal>
   );
-}
+};
 
 export default AnimatedModal;
