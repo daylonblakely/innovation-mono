@@ -25,6 +25,9 @@
       "@innovation-mono/todos/client/data-access": [
         "libs/todos/client/data-access/src/index.ts"
       ],
+      "@innovation-mono/todos/client/feature-home": [
+        "libs/todos/client/feature-home/src/index.ts"
+      ],
       "@innovation-mono/todos/client/ui": ["libs/todos/client/ui/src/index.ts"],
       "@innovation-mono/todos/types": ["libs/todos/types/src/index.ts"]
     }

@@ -1,5 +1,5 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, Types } from 'mongoose';
 
 import { Todo as ITodo } from '@innovation-mono/todos/types';
 
@@ -7,6 +7,8 @@ export type TodoDocument = Todo & Document;
 
 @Schema()
 export class Todo implements ITodo {
+  _id!: Types.ObjectId;
+
   @Prop()
   title: string;
 

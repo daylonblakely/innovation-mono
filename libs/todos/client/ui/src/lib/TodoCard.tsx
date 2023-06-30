@@ -2,7 +2,7 @@ import './client-ui.css';
 import React from 'react';
 import { Todo } from '@innovation-mono/todos/types';
 
-export interface TodoCardProps extends Todo {
+export interface TodoCardProps extends Partial<Todo> {
   isSelected: boolean;
 }
 
