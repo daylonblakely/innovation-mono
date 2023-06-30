@@ -6,7 +6,7 @@ import { Card } from './Card';
 
 interface CardData {
   id: string;
-  title: string;
+  element: React.ReactElement;
 }
 
 export interface CardListProps {
@@ -23,7 +23,7 @@ const List: React.FC<CardListProps> = ({ data }) => {
           key={item.id}
           isSelected={id === item.id}
           id={item.id}
-          title={item.title}
+          element={item.element}
         />
       ))}
     </ul>

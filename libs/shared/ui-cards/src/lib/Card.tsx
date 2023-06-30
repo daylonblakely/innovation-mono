@@ -22,7 +22,7 @@ const Overlay = ({ isSelected }: { isSelected: boolean }) => (
 export interface CardProps {
   isSelected: boolean;
   id: string;
-  title: string;
+  element: React.ReactElement<{ isSelected: boolean }>;
 }
 
 // Distance in pixels a user has to scroll a card down before we recognise
@@ -30,7 +30,7 @@ export interface CardProps {
 const dismissDistance = 150;
 
 export const Card: React.FC<CardProps> = memo(
-  ({ isSelected, id, title }) => {
+  ({ isSelected, id, element }) => {
     const history = useNavigate();
 
     const y = useMotionValue(0);
@@ -84,8 +84,7 @@ export const Card: React.FC<CardProps> = memo(
             }}
             onUpdate={checkZIndex}
           >
-            {/* {title} */}
-            {isSelected + ''}
+            {React.cloneElement(element, { isSelected })}
           </motion.div>
         </motion.div>
         {!isSelected && <Link to={id} className={`card-open-link`} />}

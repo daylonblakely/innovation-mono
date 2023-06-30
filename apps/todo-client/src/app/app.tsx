@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import { store } from '@innovation-mono/todos/client/data-access';
 import { AnimatedModal } from '@innovation-mono/shared/ui-modals';
+import { TodoCard } from '@innovation-mono/todos/client/ui';
 import { CardList } from '@innovation-mono/shared/ui-cards';
 
 const App: React.FC = () => {
@@ -48,11 +49,21 @@ const App: React.FC = () => {
           </AnimatedModal>
           <CardList
             data={[
-              { id: 'a', title: 'Test title!!!!!!!' },
-              { id: 'b', title: 'Test title!!!!!!!' },
-              { id: 'c', title: 'Test title!!!!!!!' },
-              { id: 'd', title: 'Test title!!!!!!!' },
-              { id: 'e', title: 'Test title!!!!!!!' },
+              {
+                id: 'a',
+                element: (
+                  <TodoCard
+                    title="test"
+                    description="akale;lew"
+                    completed={false}
+                    isSelected={false}
+                  />
+                ),
+              },
+              { id: 'b', element: <div>'Test title!!!!!!!'</div> },
+              { id: 'c', element: <div>'Test title!!!!!!!'</div> },
+              { id: 'd', element: <div>'Test title!!!!!!!'</div> },
+              { id: 'e', element: <div>'Test title!!!!!!!'</div> },
             ]}
           />
         </div>
