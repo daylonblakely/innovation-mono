@@ -1,16 +1,23 @@
-/*
- * Replace this with your own classes
- *
- * e.g.
- * .container {
- * }
-*/
-.card-container {
-  /* border-radius: 20px; */
-  /* background: #9090c2; */
-  background-color: rgb(241, 66, 66);
-  /* border-color: aqua;
-  border-width: 2px; */
-  /* border-radius: 8px; */
-  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); */
+.todoCard {
+  padding: 8px;
+}
+
+.todoCard-header {
+  text-align: center;
+  /* background-color: 'red'; */
+}
+
+.todoCard-content {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.todoCard-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.todoCard-footer button {
+  margin: 0 5px;
 }
