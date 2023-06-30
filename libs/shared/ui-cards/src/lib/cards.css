@@ -9,20 +9,13 @@ li {
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
+  justify-content: center;
 }
 
 .card {
   flex: 0 0 calc(33.33% - 20px); /* Adjust the width as per your preference */
-  /* background-color: rgb(201, 201, 201); */
-  /* padding: 20px; */
   margin: 10px;
-  /* border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); */
   position: relative;
-  /* padding: 25px; */
-  /* height: 460px; */
-  /* flex: 0 0 40%;
-  max-width: 40%; */
 }
 
 .card:nth-child(4n + 1),
@@ -54,7 +47,7 @@ li {
   position: fixed;
   z-index: 1;
   overflow: hidden;
-  padding: 40px 0;
+  padding: 30px 0;
 }
 
 .card-content {
@@ -97,15 +90,13 @@ li {
 
 .overlay {
   z-index: 1;
-  position: fixed;
-  background-color: rgba(0, 0, 0, 0.5);
   will-change: opacity;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: 990px;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .overlay a {
@@ -121,21 +112,21 @@ li {
 
 @media only screen and (max-width: 800px) {
   .card {
-    flex: 0 0 50%;
-    max-width: 50%;
+    flex: 0 0 100%;
+    max-width: 80%;
   }
 
   .card:nth-child(4n + 1),
   .card:nth-child(4n + 4) {
-    flex: 0 0 50%;
-    max-width: 50%;
+    flex: 0 0 100%;
+    max-width: 80%;
   }
 }
 
 @media only screen and (max-width: 600px) {
   .card {
     flex: 1 0 100%;
-    max-width: 100%;
+    max-width: 90%;
     padding-left: 0;
     padding-right: 0;
   }
@@ -143,7 +134,7 @@ li {
   .card:nth-child(4n + 1),
   .card:nth-child(4n + 4) {
     flex: 1 0 100%;
-    max-width: 100%;
+    max-width: 90%;
   }
 
   .card-content-container.open {

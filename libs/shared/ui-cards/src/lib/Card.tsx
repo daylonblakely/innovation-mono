@@ -1,7 +1,7 @@
 import './cards.css';
 import React, { memo, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion, useMotionValue, Variants } from 'framer-motion';
+import { motion, useMotionValue } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
 import { useInvertedBorderRadius } from './use-inverted-border-radius';
@@ -43,10 +43,6 @@ export const Card: React.FC<CardProps> = memo(
     const cardRef = useRef(null);
     const constraints = useScrollConstraints(cardRef, isSelected);
 
-    function checkSwipeToDismiss() {
-      y.get() > dismissDistance && history('/');
-    }
-
     function checkZIndex(latest: { scaleX: number }) {
       if (isSelected) {
         zIndex.set(2);
@@ -58,46 +54,40 @@ export const Card: React.FC<CardProps> = memo(
     // When this card is selected, attach a wheel event listener
     const containerRef = useRef(null);
 
-    const cardVariants: Variants = {
-      closed: {
-        transition: { type: 'spring', stiffness: 300, damping: 35 },
-      },
-      open: {
-        transition: {
-          type: 'spring',
-          stiffness: 200,
-          damping: 20,
-        },
-      },
-    };
-
     return (
       <li ref={containerRef} className={`card`}>
         <Overlay isSelected={isSelected} />
-        <div className={`card-content-container ${isSelected && 'open'}`}>
+        <motion.div
+          layout
+          transition={
+            isSelected
+              ? {
+                  type: 'spring',
+                  stiffness: 200,
+                  damping: 12,
+                }
+              : { type: 'spring', stiffness: 300, damping: 35 }
+          }
+          className={`card-content-container ${isSelected && 'open'}`}
+        >
           <motion.div
             ref={cardRef}
             className="card-content"
             style={{ ...inverted, zIndex, y }}
-            variants={cardVariants}
-            animate={isSelected ? 'open' : 'closed'}
-            // layoutTransition={isSelected ? openSpring : closeSpring}
             drag={isSelected ? 'y' : false}
             dragConstraints={constraints}
-            onDrag={checkSwipeToDismiss}
+            dragElastic={0.8}
+            onDragEnd={(event, info) => {
+              if (info.offset.y > dismissDistance) {
+                history('/');
+              }
+            }}
             onUpdate={checkZIndex}
           >
-            {title}
-            {/* <Image
-            id={id}
-            isSelected={isSelected}
-            pointOfInterest={pointOfInterest}
-            backgroundColor={backgroundColor}
-          />
-          <Title title={title} category={category} isSelected={isSelected} />
-          <ContentPlaceholder /> */}
+            {/* {title} */}
+            {isSelected + ''}
           </motion.div>
-        </div>
+        </motion.div>
         {!isSelected && <Link to={id} className={`card-open-link`} />}
       </li>
     );
