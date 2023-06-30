@@ -9,7 +9,8 @@ import { CardList } from '@innovation-mono/shared/ui-cards';
 
 const App: React.FC = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [todoText, setTodoText] = useState('');
+  const [todoTitleText, setTodoTitleText] = useState('');
+  const [todoDescriptionText, setTodoDescriptionText] = useState('');
 
   const openModal = () => {
     setModalIsOpen(true);
@@ -17,16 +18,16 @@ const App: React.FC = () => {
 
   const closeModal = () => {
     setModalIsOpen(false);
-    setTodoText('');
+    setTodoTitleText('');
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (todoText.trim() === '') {
+    if (todoTitleText.trim() === '') {
       return; // Don't add empty todos
     }
     // addTodo(todoText);
-    setTodoText('');
+    setTodoTitleText('');
     closeModal();
   };
 
@@ -36,16 +37,23 @@ const App: React.FC = () => {
         <div className="App">
           <button onClick={openModal}>Add Todo</button>
           <AnimatedModal modalIsOpen={modalIsOpen} closeModal={closeModal}>
-            <h2>Add Todo</h2>
             <form onSubmit={handleSubmit}>
+              <h2>Add Todo</h2>
               <input
                 type="text"
-                value={todoText}
-                onChange={(e) => setTodoText(e.target.value)}
+                placeholder="Title"
+                value={todoTitleText}
+                onChange={(e) => setTodoTitleText(e.target.value)}
               />
+              <input
+                type="text"
+                placeholder="Descripton"
+                value={todoDescriptionText}
+                onChange={(e) => setTodoDescriptionText(e.target.value)}
+              />
+              <button onClick={closeModal}>Cancel</button>
               <button type="submit">Add</button>
             </form>
-            <button onClick={closeModal}>Cancel</button>
           </AnimatedModal>
           <CardList
             data={[
