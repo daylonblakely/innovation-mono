@@ -1,9 +1,12 @@
 import './client-ui.css';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Todo } from '@innovation-mono/todos/types';
 
 export interface TodoCardProps extends Partial<Todo> {
   isSelected: boolean;
+  onComplete: () => void;
+  onDelete: () => void;
 }
 
 export const TodoCard: React.FC<TodoCardProps> = ({
@@ -11,6 +14,8 @@ export const TodoCard: React.FC<TodoCardProps> = ({
   description,
   completed,
   isSelected,
+  onComplete,
+  onDelete,
 }) => {
   return (
     <div className="todoCard">
@@ -22,8 +27,14 @@ export const TodoCard: React.FC<TodoCardProps> = ({
       </div>
       {isSelected ? (
         <div className="todoCard-footer">
-          <button>Button 1</button>
-          <button>Button 2</button>
+          {!completed ? (
+            <Link to="/">
+              <button onClick={onComplete}>Set as Complete</button>
+            </Link>
+          ) : null}
+          <Link to="/">
+            <button onClick={onDelete}>Delete</button>
+          </Link>
         </div>
       ) : null}
     </div>

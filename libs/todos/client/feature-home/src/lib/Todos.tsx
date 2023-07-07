@@ -1,5 +1,9 @@
 import React from 'react';
-import { useGetTodosQuery } from '@innovation-mono/todos/client/data-access';
+import {
+  useGetTodosQuery,
+  useDeleteTodoMutation,
+  useUpdateTodoMutation,
+} from '@innovation-mono/todos/client/data-access';
 import { TodoCard } from '@innovation-mono/todos/client/ui';
 import { CardList } from '@innovation-mono/shared/ui-cards';
 
@@ -8,8 +12,10 @@ export interface TodosProps {}
 
 export function Todos() {
   const { data, isLoading } = useGetTodosQuery();
+  const [deleteTodo, { isLoading: isDeleting }] = useDeleteTodoMutation();
+  const [updateTodo, { isLoading: isUpdating }] = useUpdateTodoMutation();
 
-  if (isLoading) {
+  if (isLoading || isDeleting || isUpdating) {
     return <div>Loading...</div>;
   }
 
@@ -29,6 +35,10 @@ export function Todos() {
                 description={description}
                 completed={completed}
                 isSelected={false}
+                onComplete={() =>
+                  updateTodo({ id: _id.toString(), completed: true })
+                }
+                onDelete={() => deleteTodo(_id.toString())}
               />
             ),
           };
