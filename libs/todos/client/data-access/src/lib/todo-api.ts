@@ -8,7 +8,12 @@ export const api = createApi({
   endpoints: (builder) => ({
     getTodos: builder.query<Todo[], void>({
       query: () => 'todos',
-      providesTags: ['Todos'],
+      providesTags: (result = []) => [
+        ...result.map(
+          ({ _id }) => ({ type: 'Todos', id: _id.toString() } as const)
+        ),
+        { type: 'Todos' as const, id: 'LIST' },
+      ],
     }),
     createTodo: builder.mutation<Todo, Partial<Todo>>({
       query: (todo) => ({
@@ -16,7 +21,7 @@ export const api = createApi({
         method: 'POST',
         body: todo,
       }),
-      invalidatesTags: ['Todos'],
+      invalidatesTags: [{ type: 'Todos', id: 'LIST' }],
     }),
     updateTodo: builder.mutation<Todo, Partial<Todo> & { id: string }>({
       query: ({ id, ...todo }) => ({
@@ -24,14 +29,14 @@ export const api = createApi({
         method: 'PUT',
         body: todo,
       }),
-      invalidatesTags: ['Todos'],
+      invalidatesTags: (todo) => [{ type: 'Todos', id: todo?._id.toString() }],
     }),
     deleteTodo: builder.mutation<void, string>({
       query: (id) => ({
         url: `todos/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: ['Todos'],
+      invalidatesTags: [{ type: 'Todos', id: 'LIST' }],
     }),
   }),
 });
