@@ -18,7 +18,7 @@ export const TodoCard: React.FC<TodoCardProps> = ({
   onDelete,
 }) => {
   return (
-    <div className="todoCard">
+    <div className={`todoCard ${completed && 'complete'}`}>
       <div className="todoCard-header">
         <h2>{title}</h2>
       </div>

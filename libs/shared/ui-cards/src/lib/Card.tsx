@@ -29,7 +29,8 @@ export interface CardProps {
 // a swipe-to dismiss action.
 const dismissDistance = 150;
 
-export const Card: React.FC<CardProps> = memo(
+export const Card: React.FC<CardProps> =
+  // memo(
   ({ isSelected, id, element }) => {
     const history = useNavigate();
 
@@ -90,8 +91,8 @@ export const Card: React.FC<CardProps> = memo(
         {!isSelected && <Link to={id} className={`card-open-link`} />}
       </li>
     );
-  },
-  (prev, next) => prev.isSelected === next.isSelected
-);
+  };
+// ,(prev, next) => prev.isSelected === next.isSelected
+// );
 
 export default Card;
